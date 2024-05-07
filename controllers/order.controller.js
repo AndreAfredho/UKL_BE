@@ -68,33 +68,23 @@ exports.addOrder = async (request, response) => {
 
 exports.showHistory = async (request, response) => {
   try {
-
-    let coba = await listModel.findOne({ where: { orderID: 1 } })
-    return response.json({
-      a: coba,
-      // b: coba2
-    })
-    console.log("INI SATUU"+coba);
-    let coba2 = await detailModel.findAll({ where: { orderID: 1 } })
-    console.log("INI DUAA"+coba2);
-
-
-    const jumlahData = await listModel.findAll()
-    let a = []
+    const jumlahData = await listModel.findAll();
+    let a = [];
     for (let index = 1; index <= jumlahData.length; index++) {
-      let coba = await listModel.findOne({ where: { orderID: index } })
-      let coba2 = await detailModel.findAll({ where: { orderID: index } })
-      a.push(coba)
-      a.push(coba2)
+      let coba = await listModel.findOne({ where: { orderID: index } });
+      let coba2 = await detailModel.findAll({ where: { orderID: index } });
+      a.push(coba);
+      a.push(coba2);
     }
+
     return response.json({
       success: true,
-      data: a
-    })
+      data: a,
+    });
   } catch (error) {
     return response.json({
       success: false,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
